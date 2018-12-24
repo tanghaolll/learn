@@ -94,6 +94,19 @@ New Relic、xhprof、Ifp
 * 诊断触发器：在问题出现时能够捕获数据的基础，有两个常见问题可能导致无法达到预期的结果：误报（false positive）或者漏检（false negative）,pt-stalk工具
 * 收集数据：尽可能收集所有能收集的数据，但只在需要的时间段内收集，oprofile、strace、tcpdump、GDB堆栈跟踪、pt-collect、pt-stalk
 * 解释结果数据：pt-mysql-summary、pt-summary输出结果打包，pt-sift得到样本汇总信息，pt-pmp
+## D.诊断间歇性问题
+### 1.尽量不要用试错的方式来解决问题
+如果一时无法定位，可能是测量的方式不正确，或者测量的点选择有误，或者使用的工具不合适
+### 2.确定单条查询问题还是服务器问题
+* 使用SHOW GLOBAL STATUS* 使用SHOW PROCESSLIST
+* 使用查询日志
+* 理解发现的问题：使得gnuplot或R，或其他绘图工具将结果绘制成图形
+### 3.捕获诊断数据
+* 诊断触发器：在问题出现时能够捕获数据的基础，有两个常见问题可能导致无法达到预期的结果：误报（false positive）或者漏检（false negative）,pt-stalk工具
+*收集数据：尽可能收集所有能收集的数据，但只在需要的时间段内收集，oprofile、strace、tcpdump、GDB堆栈跟踪、pt-collect、pt-stalk* 解释结果数据：pt-mysql-summary、pt-summary输出结果打包，pt-sift得到样本汇总信息，pt-pmp
+## E.其他剖析工具
+1.使用USER_STATISTICS表
+2.使用strace，可以调查系统调用的情况
 
 
 
