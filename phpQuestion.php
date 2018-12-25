@@ -1,4 +1,39 @@
 <?php
+// 创建一个接受字符串并返回其中包含的元音数量（计数）的函数。
+// "Celebration" ➞ 5
+$abc = "aeiouthgnbaeiou";
+function text6($abc){
+    $abc = str_split($abc);
+    $a =  array_filter($abc,function ($key){
+        return $key === "a"||$key === "e"||$key === "i"||$key === "o"||$key === "u";
+    });
+    $sum = count($a);
+    print_r($sum);
+}
+text6($abc);
+
+
+// 隐藏指定的字符串
+// "4556364607935616" ➞ "############5616"
+$str = "4556364607935616";
+function text5($str){
+    $len = strlen($str);
+    if($len < 4){
+        return $str;
+    }
+    $str1 = substr($str,-4);
+    $new_str =  str_pad($str1, $len, '#', STR_PAD_LEFT);
+    print_r($new_str);
+}
+/*text5($str);*/
+
+/*取一个整数数组（正数或负数或两者）并返回每个元素的绝对值之和*/
+$arr = [2, -1, 4, 8, 10];
+function abssume($arr){
+    $a = array_sum(array_map('abs',$arr)) ;
+    var_dump($a);
+}
+/*abssume($arr);*/
 // 创建一个带有数字数组的函数，并将平均值作为字符串返回。
 $arr = [1, 0, 4, 5, 2, 4, 1, 2, 3, 3, 3];
 function text4($arr){
