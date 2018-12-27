@@ -1,4 +1,58 @@
 <?php
+/*创建一个带有正数和负数数组的函数。返回一个数组，其中第一个元素是正数的计数，第二个元素是负数的总和。
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15] ➞ [10, -65]
+
+[92, 6, 73, -77, 81, -90, 99, 8, -85, 34] ➞ [7, -252]
+
+[91, -4, 80, -73, -28] ➞ [2, -105]
+
+null ➞ []
+
+[] ➞ []*/
+$arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15];
+function text9($arr){
+    if($arr == null || $arr == [] ){
+        $new_arr = [];
+    }else{
+        $arr_z = array_filter($arr,function($key){
+            return $key >=0;
+        });
+        $count = count($arr_z);
+        $sum_f ="";
+        foreach ($arr as $value){
+            if($value <0 ){
+                $sum_f +=$value;
+            }
+        }
+        $new_arr = [];
+        array_push($new_arr,$count,$sum_f);
+    }
+
+    var_dump($new_arr);
+}
+$arr1 = [] ;
+text9($arr);
+
+
+/*创建一个接受数组的函数，并返回数组中的最后一项。
+例子
+getLastItem([1, 2, 3]) ➞ 3
+
+getLastItem(['cat', 'dog', 'duck']) ➞ 'duck'
+
+getLastItem([true, false, true]) ➞ true笔记*/
+$arr = ['cat', 'dog', 'duck'];
+function text10($arr){
+    $count = count($arr);
+    print_r($arr[$count-1]);
+}
+function text8($arr){
+    $b = end($arr);
+    var_dump($b);
+}
+/*text8($arr);*/
+
+
 // 创建一个接受字符串并返回其中包含的元音数量（计数）的函数。
 // "Celebration" ➞ 5
 $abc = "aeiouthgnbaeiou";
