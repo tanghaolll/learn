@@ -18,5 +18,5 @@ function text($arr){
     });
     var_dump($a);
 }
-/*$arr = [1,2,3,4,5,6,7,8];
- text($arr);*/
+$arr = [1,2,3,4,5,6,7,8];
+/* text($arr);*/
