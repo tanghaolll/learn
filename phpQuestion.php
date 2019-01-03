@@ -1,4 +1,22 @@
 <?php
+
+//判断第二个字符串是否是第一个字符串的结尾，是返回true，不是返回false；
+//
+$a = "abc";
+$b = "bc";
+$c = "d";
+function text13($string1,$string2){
+    $cout_a = strlen($string2);
+    $new = stristr($string1,$string2);
+    $cout_new  = strlen($new);
+    if($cout_a == $cout_new){
+        echo "true";
+    }else{
+        echo "false";
+    }
+
+}
+text13($a,$c);
 /*countWords("Just an example here move along") ➞ 6
 
 countWords("This is a test") ➞ 4
