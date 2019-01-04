@@ -1,5 +1,28 @@
 <?php
-
+/*
+ * aka 演示输出
+ * eg： 5321 =》 5000+300+20+1
+ * */
+$num = 17890000000;
+function text14($num){
+    $arr = str_split($num);
+    $count = count($arr);
+    foreach ($arr as $key =>$value){
+        $new[] = (int)$value * pow(10,$count-$key-1);
+    }
+    $new_array = array_filter($new ,function($key){
+        return $key > 0;
+    });
+    foreach ($new_array as $value){
+        if($sum == 0){
+            $sum = $value ;
+        }else{
+            $sum = $sum ."+".$value ;
+        }
+    }
+    var_dump($sum);
+}
+text14($num);
 //判断第二个字符串是否是第一个字符串的结尾，是返回true，不是返回false；
 //
 $a = "abc";
