@@ -1,4 +1,74 @@
 <?php
+
+/*
+ *只有12.24 可以
+ * */
+function timeForMilkAndCookies( $date){
+    if( $date->format("md") === "1224" )
+    {
+        return true;
+    }else{
+        return false;
+    }
+
+
+}
+/*$a = timeForMilkAndCookies(new DateTime("2013-12-24"));
+var_dump($a);*/
+/*
+ * 字符串翻转
+ * */
+function reverse($string){
+    preg_match_all('/./us', $string, $ar);
+    echo '<pre>';
+    var_dump($ar);
+    echo '</pre>';
+    print_r(strrev($string));
+}
+/*$str = "Edabit is really helpful!";
+reverse($str);*/
+/*
+ * 求圆的周长和半径
+ * */
+class Circle{
+    public $range;
+    public $aa;
+    public  $bb;
+    public function __construct($range){
+                $this->range = $range;
+
+    }
+    public function getPerimeter(){
+        echo $this->aa = 2*pi()*$this->range;
+    }
+    public function getArea(){
+        echo $this->bb = pi() * ($this->range * $this->range);
+    }
+}
+/*$a = new Circle(11);
+$a->getPerimeter();
+echo "\n";
+$a->getArea();*/
+
+/*
+ * "Hello" ➞ "HeLlO"
+ * */
+function alternatingCaps ($str) {
+    $arr =  str_split($str);
+
+    foreach ($arr as $key=>$value){
+        if($key % 2 == 0){
+            $arr[$key] = strtoupper($value);
+        }else{
+            $arr[$key] = strtolower($value);
+        }
+        $a =  implode($arr);
+
+    }
+    var_dump($a);
+}
+$string = "OMG!!! This website is awesome!!!";
+/*alternatingCaps($string);*/
 /*
  * aka 演示输出
  * eg： 5321 =》 5000+300+20+1
