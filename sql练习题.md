@@ -1,4 +1,4 @@
-#<p align="center">sql练习题 </p>
+#sql练习题 
 
 
 #### 1.给出一张表，`customer`提供客户信息和推荐人id。
@@ -23,8 +23,11 @@
 
 
   该条sql只会返回Zack一条数据，无法返回referee_id为Null的。
+  
 ` select name from customer where referee_id != 2 or referee_id = NULL;`
+
 正解如下：
+
 `select name from customer where referee_id != 2 or referee_id is null;`
 
 
@@ -47,9 +50,13 @@
 
 
 正解如下：
+
 `select abs(p1.x-p2.x) as shorttext from  point p1 join point p2 on p1.x != p2.x order by shorttext limit 1`
+
 或者
+
 `select min(abs(p1.x - p2.x)) as shorttext from point p1 join point p2 on p1.x != p2.x`
+
 
 #### 3.如果一个国家面积超过300万平方公里或人口超过2500万，那么这个国家就很大,表名`World`。
 
@@ -73,6 +80,7 @@
 
 
 正解如下：
+
 `select name,population,area from World where area > 3000000 OR population > 25000000;`
 
 #### 4.
