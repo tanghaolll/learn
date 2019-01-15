@@ -1,5 +1,70 @@
 <?php
 
+//传入一段字符串，大于5个反转
+$str = "This is a typical sentence.";
+function reverse($str){
+    $arr = explode(' ',$str);
+    foreach ($arr as $key => $value){
+        if(strlen($value) >=5 ){
+            $item = strrev($value);
+            $arr[$key] = $item;
+        }
+    }
+    $str =  implode(' ',$arr);
+    print_r($str);
+}
+reverse($str);
+
+//去掉重复，排序
+$arr = [1, 4, 4, 4, 4, 4, 3, 2, 1, 2];
+function uniqueSort($arr){
+    $new_arr = array_unique($arr);
+    sort($new_arr);
+    var_dump($new_arr);
+
+}
+uniqueSort($arr);
+
+//首字母和最后一个互换位置，如果长度小于2 显示Incompatible ，如果传入的[1,2,3,4]，显示Incompatible，如果首字母和尾字母相同，显示Two's a pair.
+
+$str = "Cat, dog, and mouse.";
+function flipEndChars($str) {
+    if(gettype($str) !== "string"){
+        return  "Incompatible";
+    }elseif (strlen($str) < 2 ){
+        return "Incompatible";
+    }elseif ((substr($str,0,1)) == (substr($str,-1)) ){
+        return "Two's a pair.";
+    }else{
+        return substr($str,-1).substr($str,1,strlen($str)-2).substr($str,0,1);
+    }
+}
+print_r(flipEndChars($str));
+function flipEndChars1($str){
+    if(gettype($str) == "string"){
+        $arr =  str_split($str);
+        $count = count($arr);
+    }else{
+        echo "Incompatible";
+        return false;
+    }
+    if($count < 2){
+        echo "Incompatible.";
+    }elseif ($arr[0] === $arr[$count-1]){
+        echo  "Two's a pair.";
+    }elseif (gettype($str) == "array"){
+        echo "Incompatible";
+    }else{
+        $replace = "";
+        $replace = $arr[0];
+        $arr[0] = $arr[$count-1];
+        $arr[$count-1] = $replace;
+        $new = implode($arr);
+        echo "<pre>";
+        var_dump($new);
+        echo "</pre>";
+    }
+}
 /*
  *只有12.24 可以
  * */
