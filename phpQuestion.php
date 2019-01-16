@@ -1,4 +1,72 @@
 <?php
+//编写一个函数，它接受两个字符串并返回（或）它们是否是字谜。true false
+/*isAnagram("cristian", "Cristina") ➞ true
+
+isAnagram("Dave Barry", "Ray Adverb") ➞ true
+
+isAnagram("Nope", "Note") ➞ false*/
+$str1 = "Dave Barry";
+$str2 = "Ray Adverb";
+function isAnagram($s1, $s2) {
+    $s1_arr = str_split(strtolower($s1));
+    $s2_arr = str_split(strtolower($s2));
+    sort($s1_arr, SORT_STRING);
+    sort($s2_arr, SORT_STRING);
+    return $s1_arr === $s2_arr;
+}
+isAnagram($str1,$str2);
+
+//求出b返回a的相对路径
+function comporseDir($str1,$str2){
+    $arr1 = explode('/',dirname($str1));
+    $arr2 = explode('/',dirname($str2));
+    $len = count($arr2);
+    for($i = 0; $i < $len; $i++){
+        if ($arr1[$i] != $arr2[$i]){
+            break;
+        }
+    }
+    if ($i == 1) {
+        $return_arr = array_fill(0,$len,'..');
+    }
+    if ($i !=1 && $i < $len) {
+        $return_arr = array_fill(0,$len-$i ,"..");
+        var_dump($return_arr);
+    }
+    if($i == $len){
+        $return_arr = array("./");
+    }
+    $return_arr = array_merge($return_arr,array_slice($arr1,$i));
+    return implode('/',$return_arr);
+
+}
+/*$a = "/a/b/c/d.txt";
+$b = "/a/b/12/123.php";
+print_r(comporseDir($a,$b));*/
+
+//递归遍历文件夹
+function fileOPen($dir){
+    if(is_dir($dir)){
+        $files = array();
+        $child_dirs = scandir($dir);
+        foreach($child_dirs as $child_dir){
+            if($child_dir != '.' && $child_dir != '..'){
+                if(is_dir($dir.'/'.$child_dir)){
+                    $files[$child_dir] = fileOPen($dir.'/'.$child_dir);
+                }else{
+                    $files[] = $child_dir;
+                }
+            }
+        }
+        return $files;
+    }else{
+        return $dir;
+    }
+
+}
+/*    echo "<pre>";
+var_dump(fileOpen("F:\AppServ\www\book"));
+    echo "</pre>";*/
 
 //传入一段字符串，大于5个反转
 $str = "This is a typical sentence.";
