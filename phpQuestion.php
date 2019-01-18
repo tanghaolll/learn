@@ -1,4 +1,114 @@
 <?php
+/*highLow("1 2 3 4 5") ➞ "5 1"
+输出最大 最小值
+*/
+function highLow($str){
+    $arr = explode(' ',$str);
+    $count = count($arr);
+    rsort($arr);
+    echo $arr[0]." ".$arr[$count-1];
+}
+$str = "1 2 3 4 5";
+highLow($str);
+
+
+
+//求平均数，保留两位小数
+function mean($arr){
+    return round (array_sum($arr) / count($arr),2);
+    $count = count($arr);
+    $d =  array_sum($arr) / $count;
+    $b= sprintf("%.2f", $d);
+    return (string)$b;
+}
+function mean1($arr){
+    return round (array_sum($arr) / count($arr),2);
+}
+$arr =[1, 0, 4, 5, 2, 4, 1, 2, 3, 3, 3];
+// var_dump( mean($arr));
+
+
+/*capMe
+capMe(["mavis", "senaida", "letty"]) ➞ ["Mavis", "Senaida", "Letty"]*/
+function capMe1($arr){
+    return array_map('ucfirst',array_map('strtolower',$arr));
+}
+
+function capMe($arr) {
+    $new =  array_map('change',$arr);
+    print_r($new);
+}
+function change($arr){
+    $first = strtoupper(substr($arr,0,1));
+    $end = strtolower(substr($arr,1,strlen($arr)));
+    $str = $first.$end;
+    return $str;
+}
+
+/*$arr = ["samuel", "MABELLE", "letitia", "meridith"];
+var_dump(capMe($arr));*/
+/*
+ * 创建一个获取项目数组的函数，
+ * 删除所有重复项目并以与旧数组相同的顺序返回一个新数组（减去重复项）。
+ */
+function removeDups1($arr){
+    $new = array_unique($arr);
+    return $new;
+}
+function removeDups($arr){
+    $new = array();
+    foreach ($arr as $item){
+        if(!in_array($item,$new)){
+            $new[] = $item;
+        }
+    }
+    return $new;
+}
+$arr = ["John",1, "Taylor", "John",1];
+/*print_r(removeDups($arr));*/
+
+//快速排序
+function quickSort($arr){
+    if(count($arr) <= 1){
+        return $arr;
+    }
+    $index = (int)floor(count($arr) / 2);
+    $value = $arr[$index];
+    $left = $right = array();
+    array_splice($arr,$index,1);
+    for ($i = 0; $i < count($arr); $i++){
+        if($arr[$i] < $value){
+            array_push($left,$arr[$i]);
+        }else{
+            array_push($right,$arr[$i]);
+        }
+    }
+    $left = quickSort($left);
+    $right = quickSort($right);
+    array_push($left,$value);
+    $new_arr = array_merge($left,$right);
+    return $new_arr;
+}
+/*$arr = [6,5,3,1,8];
+print_r(quickSort($arr));*/
+
+
+//冒泡排序
+function bubbleSort($num) {
+    $count = count($num);
+    for ($i = 0; $i < $count-1;$i++){
+        for ($j = 0; $j < $count - $i - 1; $j++){
+            if($num[$j] < $num[$j+1]){
+                $temp = "";
+                $temp = $num[$j];
+                $num[$j] = $num[$j+1];
+                $num[$j+1] = $temp;
+            }
+        }
+    }
+    return $num;
+}
+
 //编写一个函数，它接受两个字符串并返回（或）它们是否是字谜。true false
 /*isAnagram("cristian", "Cristina") ➞ true
 
