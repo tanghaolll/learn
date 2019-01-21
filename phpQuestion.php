@@ -1,4 +1,85 @@
 <?php
+//给定数字n，编写一个将PI返回到n个小数位的函数。
+function piapia($num){
+    echo round(M_PI,$num);
+}
+piapia(5);
+/*创建一个函数，该函数接受一个数字数组并返回一个新数组，按升序排列（从最小到最大）。
+按升序对数字数组排序。
+如果functions参数为null或空数组，则返回一个空数组。
+返回新的已排序数字数组。
+*/
+function sortNumsAscending($arr) {
+    if(is_null($arr) || $arr === []){
+        return [];
+    }else{
+        sort($arr);
+        return $arr;
+
+    }
+}
+/*print_r(sortNumsAscending([1, 2, 10, 50, 5]));*/
+/*创建一个获取数字数组并返回以下统计信息的函数：
+最低价值
+最大价值
+序列长度
+平均值
+minMaxLengthAverage([6, 9, 15, -2, 92, 11]) ➞ [-2, 92, 6, 21.833333333333332]
+minMaxLengthAverage([30, 43, 20, 92, 3, 74]) ➞ [3, 92, 6, 43.666666666666664]
+minMaxLengthAverage([4.54, 8.32, 5.20]) ➞ [4.54, 8.32, 3, 6.02]
+*/
+function minMaxLengthAverage($arr){
+    return [min($arr), max($arr), count($arr), array_sum($arr) / count($arr)];
+}
+//print_r(minMaxLengthAverage([6, 9, 15, -2, 92, 11]));
+
+/*编写一个带有四个字符串参数的函数。您将比较第一个字符串和三个下一个字符串。验证第一个字符串是以第二个字符串开头
+，包括第三个字符串，还是以第四个字符串结尾。如果第一个字符串通过所有检查，则返回字符串，
+否则返回。"My head, body, and tail.""Incomplete."
+例子
+verifySubstrs("Onomatopeia", "on", "mato", "ia") ➞ "Incomplete."
+verifySubstrs("Centipede", "Cent", "tip", "pede") ➞ "My head, body, and tail."
+verifySubstrs("apple", "AP", "PPL", "LE") ➞ "Incomplete."
+*/
+function verifySubstrs ($first,$second,$third,$fourth) {
+    if( substr($first,0,strlen($second)) === $second && strpos($first,$third) >= 0 && substr($first,-strlen($fourth)) === $fourth) {
+        return "My head, body, and tail.";
+    }else{
+        return "Incomplete.";
+    }
+}
+//var_dump(verifySubstrs("Centipede", "Cent", "tip", "pede"));
+/*创建一个函数，该函数采用10个数字（0到9之间）的数组，并返回格式化为电话号码的那些数字的字符串（例如，（555）555-5555）。*/
+function formatPhoneNumber($arr){
+    return "(" . join(array_slice($arr,0,3)) .")" . " " . join(array_slice($arr,3,3)) . "-" . join(array_slice($arr,6,4));
+}
+$arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+/*print_r(formatPhoneNumber($arr));*/
+
+/*创建一个带字符串的函数，检查它是否具有相同数量的'x'和'o'并返回或者。truefalse
+返回一个布尔值（或）。truefalse
+该字符串可以包含任何字符。
+如果字符串中既不是x也不是o，则返回。true*/
+function Xo($str){
+    return substr_count(strtolower($str),"x") == substr_count(strtolower($str),"o");
+}
+function XOo($str) {
+    $char_arr = str_split($str);
+    $xs = 0;
+    $os = 0;
+    foreach ($char_arr as $char)
+    {
+        if (strtoupper($char) === "X")
+            $xs++;
+
+        if (strtoupper($char) === "O")
+            $os++;
+    }
+
+    return $xs === $os;
+}
+$str = "sfdmxoo";
+//var_dump(Xo($str));
 /*highLow("1 2 3 4 5") ➞ "5 1"
 输出最大 最小值
 */
@@ -10,7 +91,6 @@ function highLow($str){
 }
 $str = "1 2 3 4 5";
 highLow($str);
-
 
 
 //求平均数，保留两位小数
