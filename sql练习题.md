@@ -82,7 +82,37 @@
 
 `select name,population,area from World where area > 3000000 OR population > 25000000;`
 
-#### 4.
+#### 4.给定一个表`salary`，例如下面的表，其中m =男性，f =女性值
+
+
+|id         |    name  |    sex   |  salary  | 
+| :-------- | --------:| :------: | :------: |
+| 1         |   A      |  M       |  2500    |
+| 2         |   B      |  F       |  1500    |
+| 3         |   C      |  M       |  500     |
+| 4         |   D      |  F       |  1000    |
+
+
+使用单个更新查询交换所有f和m值（即，将所有f值更改为m，反之亦然），并且没有中间临时表。
+
+
+|id         |    name  |    sex   |  salary  | 
+| :-------- | --------:| :------: | :------: |
+| 1         |   A      |  F       |  2500    |
+| 2         |   B      |  M       |  1500    |
+| 3         |   C      |  F       |  500     |
+| 4         |   D      |  M       |  1000    |
+
+
+正解如下:
+
+`update salary set sex = if( sex = "m" ,"f" , "m"); `
+
+或者：
+
+`update salary set sex = case sex when  "m" then "f" when "f" then "m" else sex end; `
+
+
 
 
 
