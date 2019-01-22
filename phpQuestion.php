@@ -1,4 +1,97 @@
 <?php
+/*合并三个数组的所有可能性*/
+function arrMer($arr1,$arr2,$arr3){
+    $data = [];
+    $len1 = count($arr1);
+    $len2 = count($arr2);
+    $len3 = count($arr3);
+    for($i = 0; $i < $len1; $i++){
+        for($j = 0; $j < $len2; $j++){
+            for($k = 0; $k < $len3; $k++){
+                $str = $arr1[$i].'-'.$arr2[$j]."-".$arr3[$k];
+                array_push($data,$str);
+            }
+        }
+    }
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+}
+$arr1= ['1','2','3','4','5'];
+$arr2= ['A','B','C','D'];
+$arr3= ['a','b',];
+//arrMer($arr1,$arr2,$arr3);
+
+/** 实现随机红包
+ * @param $total 红包总金额
+ * @param $num   红包个数
+ * @return array
+ */
+class  redbao {
+    public function rand_section($total,$num)
+    {
+        $min = 0.01;//每个人最少能收到0.01元
+        $data = [];
+        for ($i = 1; $i < $num; $i++) {
+            $safe_total = ($total - ($num - $i) * $min) / ($num - $i);
+            $money = mt_rand($min * 100, $safe_total * 100) / 100;
+            $total = $total - $money;
+
+            $data[$i] = $money;
+        }
+        $data[$num] = $total;
+        return $data;
+    }
+}
+
+//$a = new redbao();
+//var_dump($a->rand_section(100,7));
+
+/*创建一个函数，该函数接受一组数字并返回集合中的最小数字。
+ * findSmallestNum*/
+function findSmallestNum($arr) {
+    echo  min($arr);
+    echo max($arr);
+}
+$arr = [0.4356, 0.8795, 0.5435, -0.9999];
+//findSmallestNum($arr);
+/*字母排序*/
+function azSort($str){
+    $arr = str_split($str);
+    sort($arr);
+    return $arr;
+}
+$str = "hello";
+//print_r(azSort($str));
+
+/*创建一个以数字作为参数的函数。将所有数字从1添加到传递给函数的数字。例如，如果输入为4，那么您的函数应返回10，因为1 + 2 + 3 + 4 = 10。*/
+
+function addUp($num) {
+    if($num == 1) {
+        return $num;
+    }else {
+        $sum = $num + addUp($num-1);
+
+        //return $sum;
+    }
+}
+$num = 4;
+echo addUp($num);
+/*
+ * 创建一个函数，非负的数组数和字符串，没有字符串返回一个新的数组。*/
+function   filterArray($arr) {
+    return  array_filter($arr,'is_integer');
+}
+$arr = [1, 2, "aasf", "1", "123", 123];
+
+//print_r(filterArray($arr));
+/*计算整数的二进制表示中的1的数量。因此，例如，因为12是二进制的'1100'，返回值应该是。2
+ * */
+function totwo($num){
+    $a =  decbin($num);
+    return substr_count($a,1);
+}
+//print_r(totwo(12));
 //给定数字n，编写一个将PI返回到n个小数位的函数。
 function piapia($num){
     echo round(M_PI,$num);
