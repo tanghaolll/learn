@@ -1,4 +1,45 @@
 <?php
+/*创建一个函数，它将两个数字作为参数及其总和。return
+* */
+function addition($int,$int1){
+    return $int + $int1;
+}
+
+echo addition(1,2);
+
+/*创建一个以数字作为唯一参数的函数，如果它小于或等于零则返回，否则返回。truefalse*/
+    function lessThanOrEqualToZero($num) {
+        return $num <= 0 ? "true":"false";
+    }
+    print_r(lessThanOrEqualToZero(-2)) ;
+
+/*
+ * 创建一个函数，该函数将数字作为参数，并返回偶数和奇数。"even""odd"
+ * */
+    function isEvenOrOdd($num) {
+        return ($num % 2)?'odd':'even';
+
+    }
+    $num = 3;
+    isEvenOrOdd($num);
+
+
+
+    /*
+     * 创建一个接受字符串并返回单词计数的函数。这个字符串将是一个句子。
+     * */
+    function countWords($str) {
+        echo count(explode(' ',$str));
+    }
+    $set ="Just an example here move along";
+      //  countWords($set);
+
+/*
+ * 创建一个接受字符串（人名和姓）的函数，并返回一个字符串，其中交换了名字和姓氏。*/
+function nameShuffle($str){
+    return implode(' ',array_reverse(explode(' ',$str)));
+
+}
 /*合并三个数组的所有可能性*/
 function arrMer($arr1,$arr2,$arr3){
     $data = [];
