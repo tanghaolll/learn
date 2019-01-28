@@ -1,3 +1,4 @@
+#<p align=center>高性能mysql</p>
 # 一、MySQL架构与历史
 ## A.并发控制
 1.共享锁（shared lock，读锁）：共享的，相互不阻塞的

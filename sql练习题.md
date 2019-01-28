@@ -1,4 +1,4 @@
-#sql练习题 
+#<p align=center>sql练习题 </p>
 
 
 #### 1.给出一张表，`customer`提供客户信息和推荐人id。
