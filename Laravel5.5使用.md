@@ -1,11 +1,15 @@
 # <p align="center"> Laravel5.5使用</p>
 ## 常用的artisan 命令
 
-|    命令                       | 说明                |
-|:--------:                    | :--:                |
-| php artisan serve            | 启动服务             |
-| php artisan migrate:install  | 数据迁移             |
-| php artisan make:controller  | 创建控制器           |
+|    命令                              | 说明                |
+|:--------:                           | :--:                |
+| php artisan serve                   | 启动服务             |
+| php artisan migrate:install         | 生成数据迁移总表      |
+| php artisan make:migration  [表]    | 生成数据迁移表        |
+| php artisan migrate                 | 执行迁移             |
+| php artisan make:controller [name]  | 创建控制器           |
+| php artisan make:model  	  [name]  | 创建模型             |
+| php artisan tinker                  | 进入tinker环境       |
 
 ### DB 配置：
 
@@ -17,6 +21,16 @@
 
 1. 在目录  `route\web.php`
 2. `Route::post('指向url','控制器@方法');`
+3. 传递模型的路由 路由中的模型名与model中的相对应
+    例如：
+
+    `Route::get('/posts/{post}','\App\Http\Controllers\PostController@show');`
+
+```
+   public function show(Post $post) {
+        return view('post/show',compact("post"));
+    }
+```
 
 ###  模板配置：
 1. 目录: `resource\view`
@@ -25,4 +39,19 @@
                           引入主模板的其他部分 `include("layout.名字")` 
    其他模板文件： `index.blade.php`  继承主模板文件 `@extends("layout.main")`          
                               被包含模板内容 `@section("content")   内容   @endsection` 
-                    
+3. 渲染变量：  ` compact("")`
+4.   循环：  `@foreach($post as $value)`  `@endforeach`
+5. `laravel`  日期返回的类型都是:  `carbon` 
+ [ 修改样式官方AP](https://carbon.nesbot.com/docs/)
+
+6.  `str_limit("$content",100,'...')` 截取多少字符串，多余用第三个参数显示
+###数据填充：
+1. 目录：`database\factories`
+2. 执行填充，先进入`tinker环境`   第二步  `factory(App\model:class,10)->make;`
+   最后写入数据库  `factory(App\model:class,10)->create;` 
+[Faker GIT地址](https://github.com/fzaninotto/Faker)
+
+###    分页
+1. 使用自带的的分页，只需调用 `paginate(7)` 方法即可
+    例如:   ` $posts = Post::orderby("created_at","desc")->paginate(6);`
+    页面渲染只有  `{{$posts->links()}}`                 
