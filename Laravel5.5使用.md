@@ -45,6 +45,7 @@
  [ 修改样式官方AP](https://carbon.nesbot.com/docs/)
 
 6.  `str_limit("$content",100,'...')` 截取多少字符串，多余用第三个参数显示
+
 ###数据填充：
 1. 目录：`database\factories`
 2. 执行填充，先进入`tinker环境`   第二步  `factory(App\model:class,10)->make;`
