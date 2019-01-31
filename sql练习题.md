@@ -113,6 +113,37 @@
 `update salary set sex = case sex when  "m" then "f" when "f" then "m" else sex end; `
 
 
+#### Employee表包含所有员工。每个员工都有一个Id，并且还有一个部门ID列。
+
+|Id         |    Name   |   Salary | DepartmentId| 
+| :-------- | --------: | :------: | :------:    |
+| 1         |   Joe     |  70000   |  1          |
+| 2         |   Henry   |  80000   |  2          |
+| 3         |   Sam     |  60000   |  2          |
+| 4         |   Max     |  90000   |  1          |
+| 5         |   Janet   |  69000   |  1          |
+| 6         |   Randy   |  85000   |  1          |
+
+Department表包含公司的所有部门
+
+|id         |    name    | 
+| :-------- | :--------: | 
+| 1         |   IT       |  
+| 2         |   Sales    | 
+
+编写SQL查询以查找在每个部门中获得前三名薪水的员工,结果如下：
+
+|Department |   Employee | DepartmentId| 
+| :--------:| :------:   | :------:    |
+|   IT      |  Max       |  90000      |
+|   IT      |  Randy     |  85000      |
+|   IT      |  Joe       |  70000      |
+|   Sales   |  Henry     |  80000      |
+|   Sales   |  Sam       |  60000      |
+
+
+正解如下:
+ `select p2.Name as Department,p1.Name as Employee,p1.Salary from employee p1 join department p2 on p1.DepartmentId = p2.Id where  3 > (select count(distinct(p3.Salary)) from employee p3 where p3.Salary > p1.Salary and p1.DepartmentId = p3.DepartmentId) ;`
 
 
 
