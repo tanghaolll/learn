@@ -32,6 +32,12 @@
     }
 ```
 
+### 常用配置
+1. 时区： 目录 `config/app.php`     ` 'timezone' => 'Asia/shanghai',`
+2. 翻译文件 ： 目录 `config/app.php`   `'locale' => 'zh'`,
+	建立中文翻译目录  `resours/lang/zh`
+
+
 ###  模板配置：
 1. 目录: `resource\view`
 2. layout :
@@ -43,8 +49,30 @@
 4.   循环：  `@foreach($post as $value)`  `@endforeach`
 5. `laravel`  日期返回的类型都是:  `carbon` 
  [ 修改样式官方AP](https://carbon.nesbot.com/docs/)
-
 6.  `str_limit("$content",100,'...')` 截取多少字符串，多余用第三个参数显示
+7.  表单提交生成token   `{{csrf_field()}}`
+8.  解析html标签  `{!!变量!!}`
+
+### 控制器
+1. 数据显示 ` dd(request());`
+2. 验证 `$this->vaildate($a,$b,$c)` 
+ * $a 验证的数组   `request()`
+ * $b 验证规则 
+
+```
+['title'=>'String|max:25|min:5|required',
+ 'content' => 'required|String|min:10']
+```
+
+  * $c 返回的错误信息  `['title.min' => "必须大于10个字符"]`
+验证失败返回 `$error->all()` 方法
+
+ 
+ 
+### 模型
+插入数据`create()`方法，需要在`model`中设置
+* `$fillable`允许插入字段或者
+* `$guarded`不允许插入字段
 
 ### 数据填充：
 1. 目录：`database\factories`
