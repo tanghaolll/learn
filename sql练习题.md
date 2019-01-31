@@ -143,8 +143,10 @@ Department表包含公司的所有部门
 
 
 正解如下:
- `select p2.Name as Department,p1.Name as Employee,p1.Salary from employee p1 join department p2 on p1.DepartmentId = p2.Id where  3 > (select count(distinct(p3.Salary)) from employee p3 where p3.Salary > p1.Salary and p1.DepartmentId = p3.DepartmentId) ;`
 
+```
+select p2.Name as Department,p1.Name as Employee,p1.Salary from employee p1 join department p2 on p1.DepartmentId = p2.Id where  3 > (select count(distinct(p3.Salary)) from employee p3 where p3.Salary > p1.Salary and p1.DepartmentId = p3.DepartmentId) ; 
+```
 
 
 
