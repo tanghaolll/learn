@@ -10,7 +10,7 @@
 | php artisan make:controller [name]  | 创建控制器           |
 | php artisan make:model  	  [name]  | 创建模型             |
 | php artisan tinker                  | 进入tinker环境       |
-
+| php artisan storage:link            | 映射storage文件夹    |
 ### DB 配置：
 
 1. 在目录 ： `config\databases`
@@ -52,7 +52,9 @@
 6.  `str_limit("$content",100,'...')` 截取多少字符串，多余用第三个参数显示
 7.  表单提交生成token   `{{csrf_field()}}`
 8.  解析html标签  `{!!变量!!}`
-
+9.  AJAX获取token的办法： `<meta name="csrf-token content="{{csrf_token()}}">`
+	获取方式： `$('meta[name="csrf-token"].attr('content')')`
+	
 ### 控制器
 1. 数据显示 ` dd(request());`
 2. 验证 `$this->vaildate($a,$b,$c)` 
@@ -84,3 +86,20 @@
 1. 使用自带的的分页，只需调用 `paginate(7)` 方法即可
     例如:   ` $posts = Post::orderby("created_at","desc")->paginate(6);`
     页面渲染只有  `{{$posts->links()}}`                 
+
+### 文件上传
+1. .默认会指向  `storage\app`  需要映射 `public\storage`
+2. 修改 `config\filesystems.php`  将default指向public
+3. 执行 `php artisan storage:link`  
+4. 这是`public \storage ` 指向了 `storage\app\public`   
+5. 依赖注入上传文件
+ 
+```
+public function imageUpload(Request $request){
+        $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
+        return asset('storage/' . $path);
+    }
+```
+
+
+
