@@ -66,12 +66,14 @@
  'content' => 'required|String|min:10']
 ```
 
+验证数据库唯一：`unique:表，字段`
   * $c 返回的错误信息  `['title.min' => "必须大于10个字符"]`
 验证失败返回 `$error->all()` 方法
 
  
  
 ### 模型
+model 默认表名后面加s，如需设置，`protected $table = 表名`
 插入数据`create()`方法，需要在`model`中设置
 * `$fillable`允许插入字段或者
 * `$guarded`不允许插入字段
