@@ -62,7 +62,7 @@
  * $b 验证规则 
 
 ```
-['title'=>'String|max:25|min:5|required',
+['title'=>'String|max:25|min:5|required|unique:表,字段',
  'content' => 'required|String|min:10']
 ```
 
@@ -103,5 +103,51 @@ public function imageUpload(Request $request){
     }
 ```
 
+### 用户认证
+1. 认证用户是否登陆   ` if (\Auth::attempt($user, $is_remember))`
 
+第一个参数传入需要验证的字段数组,如果认证成功,attempt 方法将会返回 true,反之则为 false。
+
+第二个参数需要传入一个布尔值,在用户注销前 session 值都会被一直保存,users 数据表一定要包含一个 remember_token 字段,这是用来保存「记住我」令牌的
+
+2. 登出  `  \Auth::logout();`
+
+### 用户权限
+
+ 1. 生成策略：`php artisan make:policy PostPolicy`
+ 2. 修改   `app/Policies/PostPolicy.php`
+更新的策略
+
+```
+public function update(User $user, Post $post) {
+        return $user->id == $post->user_id;
+    }
+```
+
+3. 注册策略 目录:    ` app/Providers/AuthServiceProvider.php`
+
+```
+protected $policies = [
+    // 'App\Model' => 'App\Policies\ModelPolicy',
+    // 'App\Post' => 'App\Policies\PostPolicy',
+    Post::class => PostPolicy::class,
+];
+```
+
+4. 控制器使用 `$this->authorize('update',$post);`
+5. 模板引用：
+ 
+```
+@can('update', $post)
+    <!-- 当前用户可以更新博客 -->
+@elsecan('create', $post)
+    <!-- 当前用户可以新建博客 -->
+@endcan
+
+@cannot('update', $post)
+    <!-- 当前用户不可以更新博客 -->
+@elsecannot('create', $post)
+    <!-- 当前用户不可以新建博客 -->
+@endcannot
+```
 
