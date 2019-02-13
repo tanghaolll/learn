@@ -1095,3 +1095,64 @@ MySQL的优化做得并不好
 ## D.管理和备份二进制日志
 1. expire_log_days变量MySQL定期清理日志
 
+## E.备份数据
+1. 生成逻辑备份
+* SQL导出：mysqldump方式
+* 符号分隔文件备份：使用SELECT INTO OUTFILE以符号分隔文件格式创建数据的逻辑备份
+2. 文件系统快照
+* 支持快照的文件系统和设备包括FreeBSD的文件系统、ZFS文件系统、GNU/Linux的逻辑卷管理（LVM），以及许多的SAN系统和文件存储解决方案
+## F.从备份中恢复
+1. 恢复步骤：
+* 停止MySQL服务器
+* 记录服务器的配置和文件权限
+* 将数据从备份中移到MySQL数据目录
+* 改变配置
+* 改变文件权限
+* 以限制访问模式重启服务器，等待完成启动
+* 载入逻辑备份文件
+* 检查和重放二进制日志
+* 检测已经还原的数据
+* 以完全权限重启服务器
+## G.备份和恢复工具
+1. MySQL Enterprise Backup
+2. Percona XtraBackup
+3. mylvmbackup
+4. Zmanda Recovery Manager
+5. mydunper
+6. mysqldump
+# 十六、MySQL用户工具
+## A.接口工具
+1. MySQL Workbench
+2. SQLyog
+3. phpMyAdmin4.Adminer
+## B.命令行工具集
+1. Percona Toolkit
+2. Maatkit and Aspersa
+3. The openark kit
+4. MySql workbenchC.SQL
+实用集
+1. common_schema
+2. mysql-sr-lib
+3. MySQL UDF仓库
+4. MySQL Forge
+## D.监测工具
+1. 开源的监控工具
+* Nagios
+* Zabbix
+* Zenoss
+* OpenNMS
+* Groundwork Open Source
+* MRTG
+* Cacti
+* Ganglia
+* Munin
+2. 商业监控系统
+* MySQL Enterprise Monitor
+* MONyog
+* New Relic
+* Circonus
+* Monitis
+* Splunk
+* Pingdom
+3. Innotop的命令行监控
+
