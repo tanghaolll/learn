@@ -151,3 +151,41 @@ protected $policies = [
 @endcannot
 ```
 
+
+### 模型关联
+一对一   一对多  反向一对多  反向多对多   远程一对多   多态关联  多态多对多
+
+
+### 公用视图文件合并
+
+在目录：App\Providers\AppServiceProvider.php
+
+```php
+ \View::composer('layout.sidebar',function ($view){
+            $topics = \App\Topic::all();
+            $view->with('topics',$topics);
+```
+
+
+### 本地约束scope
+ 
+
+```
+public function scopeAuthorBy($query,$user_id)
+    {
+        return $query->where('user_id',$user_id);
+    }
+
+    public function postTopics()
+    {
+        return $this->hasMany(\App\PostTopic::class,'post_id','id');
+    }
+    // 不属于某个专题的文章
+    public function scopeTopicNotBy( $query, $topic_id)
+    {
+        return $query->doesntHave('postTopics', 'and', function($q) use ($topic_id) {
+            $q->where("topic_id", $topic_id);
+        });
+    }
+```
+
