@@ -126,6 +126,28 @@ MDL 会直到事务提交才会释放，在做表结构变更的时候，一定�
 * 对于普通索引来说，则是将更新记录在 change buffe，语句结束执行
 写多读少的适合用change_buffer,如果写完，就查询，不会减少随机读i/o，还要维护change_buffer
 
+### 9.给字符串加索引
+* 前缀索引
+使用前缀索引，定义好长度，就可以做到既节省空间，又不用额外增加太多的查询成本
+使用前缀索引就用不上覆盖索引对查询性能的优化了
+
+```
+mysql> alter table SUser add index index1(email);
+或
+mysql> alter table SUser add index index2(email(6));
+```
+hash索引和倒叙存储
+
+### 10. 为什么我的MySQL会“抖”一下
+* 脏页：当内存中的数据页和磁盘数据页中内容太不一致的时候，内存的即为脏页
+* 内存数据写入到磁盘后，内存和磁盘上的数据页的内容就一致了，称干净页
+刷新脏页的情况
+1. 当innoDB的 redo log 写满了，会停止更行，腾出一部分空间，需要把所有腾出的空间这段的脏页全部flush到磁盘
+2. 内存不足的时候，当需要新的内存页但是内存不够用，要淘汰一些脏页，给别的数据页用，将淘汰的脏页写到磁盘
+* innodb_io_capacity 这个参数了，它会告诉你的磁盘能力，磁盘的 IOPS 可以通过 fio 这个工具来测试  
+` fio -filename=$filename -direct=1 -iodepth 1 -thread -rw=randrw -ioengine=psync -bs=16k -size=500M -numjobs=10 -runtime=10 -group_reporting -name=mytest `
+
+
 
 
 
