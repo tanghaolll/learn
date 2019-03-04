@@ -11,6 +11,8 @@
 | php artisan make:model  	  [name]  | 创建模型             |
 | php artisan tinker                  | 进入tinker环境       |
 | php artisan storage:link            | 映射storage文件夹    |
+| php artisan queue:table             | 创建队列表           |
+| php artisan make:job  [name]        | 创建队列job          |
 ### DB 配置：
 
 1. 在目录 ： `config\databases`
@@ -189,3 +191,44 @@ public function scopeAuthorBy($query,$user_id)
     }
 ```
 
+
+### DB队列
+目录`.env`中设置`QUEUE_DRIVER=database`
+1. `php artisan queue table`
+2. `php artisan migrate`
+3. `php artisan make:job SendMessage`
+4. 在目录`App\jobs\SendMessage`
+5. 
+
+```
+  public function __construct(\App\Notice $notice)
+    {
+        //
+        $this->notice = $notice;
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //通知每个用户系统消息
+        $users = \App\User::all();
+        foreach ($users as $user){
+            $user->addNotice($this->notice);
+        }
+
+
+    }
+```
+
+6.  分法逻辑：`dispatch(new \App\Jobs\SendMessage($notice));`
+7.  启动进程：`php artisan queue work`
+
+
+#laravel 优化
+1. 路由缓存 `php artisan route cache` (路由里面尽量不要有匿名函数)目录 `bootstrap/route.php`
+2. 配置文件缓存 `php artisan config cache` 目录 `bootstrap/config.php`
+3. 优化类加载 `php artisan optimize`  目录 `vendor/composer/autoloaad_classmap.php`
