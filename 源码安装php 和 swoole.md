@@ -16,7 +16,7 @@
 
 
 
-### 二安装swoole
+### 二.安装swoole
 1. 在swoole的安装包，执行`php\bin\phpize` 生成configure文件
 2. `. /configure --with-php-config=/usr/local/php/bin/php-conf` 找到属于哪个php
 3. `make`
@@ -24,3 +24,15 @@
 5. 修改`php.ini`配置文件增加swoole扩展
 
 
+###三. 安装redis
+1. 下载redis研所包
+2. make
+3. 进入redis/src目录 执行 ./redis-server 开启redis服务
+4. 使用异步redis 需要一个redis包 [hiredis](https://github.com/redis/hiredis)
+5. make
+6. make install
+7. ldconfig
+8. 从新编译swoole `.\configure --with-php-config=/usr/local/php/bin/php-conf  --enable-async-redis`
+9. make
+10. make install
+11. 查看异步redis是否成功 `php --ri swoole`
